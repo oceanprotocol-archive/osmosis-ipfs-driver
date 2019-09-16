@@ -6,15 +6,11 @@ from osmosis_ipfs_driver.data_plugin import Plugin
 osmo = Plugin()
 
 
-def test_copy_file():
+def test_driver_type():
     assert osmo.type() == 'IPFS'
 
 
 def test_list():
-    pass
-
-
-def test_files_share():
     pass
 
 

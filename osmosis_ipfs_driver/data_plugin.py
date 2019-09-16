@@ -28,6 +28,9 @@ class Plugin(AbstractPlugin):
         pass
 
     def generate_url(self, remote_file):
+        assert remote_file and isinstance(remote_file, str) \
+               and remote_file.startswith('ipfs://'), f'Bad argument type `{remote_file}`' \
+                                                      f', expected a str URL starting with "ipfs://"'
         cid = remote_file.split('ipfs://')[1]
         url = f'{self._ipfs_gateway}/ipfs/{cid}'
         return url
