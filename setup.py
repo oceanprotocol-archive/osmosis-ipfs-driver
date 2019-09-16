@@ -29,7 +29,6 @@ install_requirements = [
 setup_requirements = ['pytest-runner', ]
 
 test_requirements = [
-    'codacy-coverage',
     'coverage',
     'docker',
     'mccabe',
