@@ -7,7 +7,7 @@ from osmosis_driver_interface.data_plugin import AbstractPlugin
 
 class Plugin(AbstractPlugin):
     IPFS_GATEWAY_ENVVAR = 'IPFS_GATEWAY'
-    DEFAULT_IPFS_GATEWAY = 'gateway.ipfs.io/ipfs'
+    DEFAULT_IPFS_GATEWAY = 'https://gateway.ipfs.io'
     PROTOCOL = 'ipfs://'
 
     def __init__(self, config=None):
@@ -27,13 +27,16 @@ class Plugin(AbstractPlugin):
     def list(self, remote_folder):
         pass
 
+    @staticmethod
+    def parse_url(url):
+        cid = url.split(Plugin.PROTOCOL)[1]
+        return cid
+
     def generate_url(self, remote_file):
         assert remote_file and isinstance(remote_file, str) \
-               and remote_file.startswith('ipfs://'), f'Bad argument type `{remote_file}`' \
-                                                      f', expected a str URL starting with "ipfs://"'
-        cid = remote_file.split('ipfs://')[1]
-        url = f'{self._ipfs_gateway}/ipfs/{cid}'
-        return url
+               and remote_file.startswith(self.PROTOCOL), f'Bad argument type `{remote_file}`' \
+                                                          f', expected a str URL starting with "ipfs://"'
+        return f'{self._ipfs_gateway}/ipfs/{self.parse_url(remote_file)}'
 
     def delete(self, remote_file):
         pass
