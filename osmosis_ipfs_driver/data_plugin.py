@@ -29,13 +29,15 @@ class Plugin(AbstractPlugin):
 
     @staticmethod
     def parse_url(url):
+        assert url and isinstance(url, str) \
+               and url.startswith(Plugin.PROTOCOL), \
+               f'Bad argument type `{url}`, expected ' \
+               f'a str URL starting with "ipfs://"'
+
         cid = url.split(Plugin.PROTOCOL)[1]
         return cid
 
     def generate_url(self, remote_file):
-        assert remote_file and isinstance(remote_file, str) \
-               and remote_file.startswith(self.PROTOCOL), f'Bad argument type `{remote_file}`' \
-                                                          f', expected a str URL starting with "ipfs://"'
         return f'{self._ipfs_gateway}/ipfs/{self.parse_url(remote_file)}'
 
     def delete(self, remote_file):
