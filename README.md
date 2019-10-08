@@ -1,4 +1,4 @@
-from osmosis_driver_interface.osmosis import Osmosis[![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
+[![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
 
 # osmosis-ipfs-driver
 
@@ -27,7 +27,6 @@ Install the osmosis ipfs driver and set ipfs gateway envvar
 ```bash
 pip install osmosis-ipfs-driver
 export IPFS_GATEWAY=https://gateway.ipfs.io
-
 ```
 
 Instantiate an Osmosis instance and resolve an ipfs url
@@ -39,7 +38,6 @@ osm = Osmosis(url)  # the proper osmosis driver is loaded automatically to match
 
 # Resolve the url
 download_url = osm.data_plugin.generate_url(url)
-
 ```
 
 ## Code Style
